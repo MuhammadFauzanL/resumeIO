@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import PersonalDetailsForm from './PersonalDetailsForm';
+import ExperienceForm from './ExperienceForm';
+import EducationForm from './EducationForm';
+import SkillsForm from './SkillsForm';
+import SummaryForm from './SummaryForm';
+import OrganizationForm from './OrganizationForm';
+import LanguageForm from './LanguageForm';
+import CourseForm from './CourseForm';
+import ReferenceForm from './ReferenceForm';
+import CertificationForm from './CertificationForm';
+import { User, Briefcase, GraduationCap, PenTool, FileText, Award } from 'lucide-react';
+
+const FormEditor = () => {
+    const [activeSection, setActiveSection] = useState('personal');
+
+    const sections = [
+        { id: 'personal', label: 'Personal Details', icon: User, component: PersonalDetailsForm },
+        { id: 'summary', label: 'Professional Summary', icon: FileText, component: SummaryForm },
+        { id: 'experience', label: 'Employment History', icon: Briefcase, component: ExperienceForm },
+        { id: 'education', label: 'Education', icon: GraduationCap, component: EducationForm },
+        { id: 'skills', label: 'Skills', icon: PenTool, component: SkillsForm },
+        { id: 'organizations', label: 'Organizations', icon: User, component: OrganizationForm },
+        { id: 'languages', label: 'Languages', icon: FileText, component: LanguageForm },
+        { id: 'courses', label: 'Courses', icon: GraduationCap, component: CourseForm },
+        { id: 'certifications', label: 'Certifications', icon: Award, component: CertificationForm },
+        { id: 'references', label: 'References', icon: User, component: ReferenceForm },
+    ];
+
+    const ActiveComponent = sections.find(s => s.id === activeSection)?.component || PersonalDetailsForm;
+
+    return (
+        <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Resume Editor</h2>
+
+            {/* Navigation Tabs */}
+            <div className="flex space-x-2 overflow-x-auto pb-2 border-b border-gray-200 mb-6">
+                {sections.map((section) => {
+                    const Icon = section.icon;
+                    return (
+                        <button
+                            key={section.id}
+                            onClick={() => setActiveSection(section.id)}
+                            className={`flex items-center px-4 py-2 rounded-md transition-colors duration-200 whitespace-nowrap ${activeSection === section.id
+                                ? 'bg-blue-100 text-primary font-medium'
+                                : 'text-gray-600 hover:bg-gray-100'
+                                }`}
+                        >
+                            <Icon className="h-4 w-4 mr-2" />
+                            {section.label}
+                        </button>
+                    );
+                })}
+            </div>
+
+            {/* Active Form */}
+            <div className="animate-fadeIn">
+                <ActiveComponent />
+            </div>
+        </div>
+    );
+};
+
+export default FormEditor;

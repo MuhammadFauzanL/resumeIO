@@ -1,0 +1,104 @@
+import React, { createContext, useState, useContext, useEffect } from 'react';
+
+const ResumeContext = createContext();
+
+export const useResume = () => useContext(ResumeContext);
+
+const INITIAL_STATE = {
+    personalInfo: {
+        firstName: '',
+        lastName: '',
+        jobTitle: '',
+        email: '',
+        phone: '',
+        country: '',
+        city: '',
+        address: '',
+        postalCode: '',
+        drivingLicense: '',
+        nationality: '',
+        placeOfBirth: '',
+        dateOfBirth: '',
+        linkedin: '',
+        website: ''
+    },
+    summary: '',
+    experience: [],
+    education: [],
+    skills: [],
+    organizations: [],
+    languages: [],
+    courses: [],
+    references: [],
+    certifications: [], // Added certifications
+    themeColor: '#007BFF', // Default blue
+    template: 'modern'
+};
+
+export const ResumeProvider = ({ children }) => {
+    const [resumeData, setResumeData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    // Load from LocalStorage on mount
+    useEffect(() => {
+        const savedData = localStorage.getItem('resumeData');
+        if (savedData) {
+            try {
+                setResumeData(JSON.parse(savedData));
+            } catch (e) {
+                console.error("Failed to parse resume data", e);
+                setResumeData(INITIAL_STATE);
+            }
+        } else {
+            setResumeData(INITIAL_STATE);
+        }
+        setLoading(false);
+    }, []);
+
+    // Save to LocalStorage whenever resumeData changes
+    useEffect(() => {
+        if (resumeData) {
+            localStorage.setItem('resumeData', JSON.stringify(resumeData));
+        }
+    }, [resumeData]);
+
+    const updateResumeData = (newData) => {
+        setResumeData(prev => ({
+            ...prev,
+            ...newData
+        }));
+    };
+
+    const updateSection = (section, data) => {
+        setResumeData(prev => ({ ...prev, [section]: data }));
+    };
+
+    const resetResume = () => {
+        if (window.confirm("Are you sure you want to clear all data? This cannot be undone.")) {
+            setResumeData(INITIAL_STATE);
+            localStorage.removeItem('resumeData');
+        }
+    };
+
+    // Compatibility dummies for components that might call these
+    const fetchResume = () => { };
+    const saveResume = () => { };
+    const createResume = () => { };
+
+    return (
+        <ResumeContext.Provider value={{
+            resumeData,
+            loading,
+            updateResumeData,
+            updateSection,
+            resetResume,
+            // Keep these for compatibility but they do nothing now (auto-save is on)
+            fetchResume,
+            saveResume,
+            createResume,
+            saving: false
+        }}>
+            {children}
+        </ResumeContext.Provider>
+    );
+};

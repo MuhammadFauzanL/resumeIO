@@ -1,0 +1,39 @@
+import React from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { GripVertical } from 'lucide-react';
+
+const SortableItem = ({ id, children, handleRemove, expanded, onToggleExpand }) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging
+    } = useSortable({ id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        zIndex: isDragging ? 1 : 0,
+        opacity: isDragging ? 0.5 : 1,
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} className="border border-gray-200 rounded-md bg-white overflow-hidden mb-4">
+            <div
+                className="flex items-center bg-gray-50 hover:bg-gray-100"
+            >
+                <div {...attributes} {...listeners} className="p-3 cursor-move text-gray-400 hover:text-gray-600 border-r border-gray-200">
+                    <GripVertical className="w-4 h-4" />
+                </div>
+                <div className="flex-grow p-3 cursor-pointer" onClick={onToggleExpand}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default SortableItem;

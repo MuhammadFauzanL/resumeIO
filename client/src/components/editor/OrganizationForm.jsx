@@ -1,0 +1,122 @@
+import React, { useState } from 'react';
+import { useResume } from '../../context/ResumeContext';
+import Input from '../ui/Input';
+import RichTextarea from '../ui/RichTextarea';
+import Button from '../ui/Button';
+import { Plus, Trash, ChevronDown, ChevronUp } from 'lucide-react';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import SortableItem from '../ui/SortableItem';
+
+const generateId = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
+
+const OrganizationForm = () => {
+    const { resumeData, updateResumeData } = useResume();
+    const { organizations = [] } = resumeData || {};
+    const [expandedIds, setExpandedIds] = useState([]);
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+    );
+
+    const handleAdd = () => {
+        const newOrg = {
+            id: generateId(),
+            role: '',
+            organization: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: ''
+        };
+        updateResumeData({ organizations: [newOrg, ...organizations] });
+        setExpandedIds([newOrg.id, ...expandedIds]);
+    };
+
+    const handleRemove = (id) => {
+        updateResumeData({ organizations: organizations.filter(org => org.id !== id) });
+    };
+
+    const handleChange = (id, field, value) => {
+        const newOrgs = organizations.map(org =>
+            org.id === id ? { ...org, [field]: value } : org
+        );
+        updateResumeData({ organizations: newOrgs });
+    };
+
+    const toggleExpand = (id) => {
+        setExpandedIds(prev => prev.includes(id) ? prev.filter(eid => eid !== id) : [...prev, id]);
+    };
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active.id !== over.id) {
+            const oldIndex = organizations.findIndex((org) => org.id === active.id);
+            const newIndex = organizations.findIndex((org) => org.id === over.id);
+            updateResumeData({ organizations: arrayMove(organizations, oldIndex, newIndex) });
+        }
+    };
+
+    return (
+        <div className="space-y-6">
+            <div className="flex justify-between items-center border-b pb-2">
+                <h3 className="text-lg font-medium text-gray-900">Organizations</h3>
+                <Button onClick={handleAdd} size="sm" className="text-sm py-1 px-3">
+                    <Plus className="w-4 h-4 mr-1" /> Add Organization
+                </Button>
+            </div>
+
+            <div className="space-y-4">
+                {organizations.length === 0 && (
+                    <div className="text-center py-6 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                        <p className="text-gray-500 text-sm">No organizations added yet.</p>
+                    </div>
+                )}
+
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={organizations.map(org => org.id)} strategy={verticalListSortingStrategy}>
+                        {organizations.map((org) => (
+                            <SortableItem key={org.id} id={org.id} onToggleExpand={() => toggleExpand(org.id)}>
+                                <div className="flex justify-between items-center w-full">
+                                    <div className="font-medium text-gray-700">
+                                        {org.role || '(Role)'} <span className="text-gray-400 font-normal">at {org.organization || '(Organization)'}</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <Button variant="ghost" className="p-1 hover:bg-red-50 hover:text-red-600" onClick={(e) => { e.stopPropagation(); handleRemove(org.id); }}>
+                                            <Trash className="w-4 h-4" />
+                                        </Button>
+                                        {expandedIds.includes(org.id) ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
+                                    </div>
+                                </div>
+
+                                {expandedIds.includes(org.id) && (
+                                    <div className="mt-4 pt-4 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-4 animate-fadeIn cursor-default" onClick={(e) => e.stopPropagation()}>
+                                        <Input label="Role" value={org.role} onChange={(e) => handleChange(org.id, 'role', e.target.value)} />
+                                        <Input label="Organization" value={org.organization} onChange={(e) => handleChange(org.id, 'organization', e.target.value)} />
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <Input label="Start Date" placeholder="MM/YYYY" value={org.startDate} onChange={(e) => handleChange(org.id, 'startDate', e.target.value)} />
+                                            <Input label="End Date" placeholder="MM/YYYY" value={org.endDate} onChange={(e) => handleChange(org.id, 'endDate', e.target.value)} />
+                                        </div>
+                                        <Input label="City" value={org.city} onChange={(e) => handleChange(org.id, 'city', e.target.value)} />
+                                        <div className="md:col-span-2">
+                                            <RichTextarea
+                                                label="Description"
+                                                value={org.description}
+                                                onChange={(e) => handleChange(org.id, 'description', e.target.value)}
+                                                rows={4}
+                                                placeholder="Describe your role and responsibilities..."
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </SortableItem>
+                        ))}
+                    </SortableContext>
+                </DndContext>
+            </div>
+        </div>
+    );
+};
+
+export default OrganizationForm;
