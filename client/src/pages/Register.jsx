@@ -1,81 +1,1 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import Layout from '../components/Layout';
-import Card from '../components/ui/Card';
-import Input from '../components/ui/Input';
-import Button from '../components/ui/Button';
-
-const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
-    const { register } = useAuth();
-    const navigate = useNavigate();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-
-        if (password !== confirmPassword) {
-            return setError('Passwords do not match');
-        }
-
-        const result = await register(email, password);
-        if (result.success) {
-            navigate('/dashboard');
-        } else {
-            setError(result.message);
-        }
-    };
-
-    return (
-        <Layout>
-            <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                <div className="w-full max-w-md">
-                    <div className="text-center mb-8">
-                        <h2 className="text-3xl font-extrabold text-gray-900">Create your account</h2>
-                        <p className="mt-2 text-sm text-gray-600">
-                            Already have an account?{' '}
-                            <Link to="/login" className="font-medium text-primary hover:text-blue-500">
-                                Sign in
-                            </Link>
-                        </p>
-                    </div>
-                    <Card>
-                        <form className="space-y-6" onSubmit={handleSubmit}>
-                            <Input
-                                label="Email address"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <Input
-                                label="Password"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                            <Input
-                                label="Confirm Password"
-                                type="password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                            />
-                            {error && <div className="text-red-500 text-sm">{error}</div>}
-                            <Button type="submit" className="w-full">
-                                Create Account
-                            </Button>
-                        </form>
-                    </Card>
-                </div>
-            </div>
-        </Layout>
-    );
-};
-
-export default Register;
+import React, { useState } from 'react';import { useNavigate, Link } from 'react-router-dom';import { useAuth } from '../context/AuthContext';import Layout from '../components/Layout';import Card from '../components/ui/Card';import Input from '../components/ui/Input';import Button from '../components/ui/Button';const Register = () => {    const [email, setEmail] = useState('');    const [password, setPassword] = useState('');    const [confirmPassword, setConfirmPassword] = useState('');    const [error, setError] = useState('');    const { register } = useAuth();    const navigate = useNavigate();    const handleSubmit = async (e) => {        e.preventDefault();        setError('');        if (password !== confirmPassword) {            return setError('Passwords do not match');        }        const result = await register(email, password);        if (result.success) {            navigate('/dashboard');        } else {            setError(result.message);        }    };    return (        <Layout>            <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">                <div className="w-full max-w-md">                    <div className="text-center mb-8">                        <h2 className="text-3xl font-extrabold text-gray-900">Create your account</h2>                        <p className="mt-2 text-sm text-gray-600">                            Already have an account?{' '}                            <Link to="/login" className="font-medium text-primary hover:text-blue-500">                                Sign in                            </Link>                        </p>                    </div>                    <Card>                        <form className="space-y-6" onSubmit={handleSubmit}>                            <Input                                label="Email address"                                type="email"                                value={email}                                onChange={(e) => setEmail(e.target.value)}                                required                            />                            <Input                                label="Password"                                type="password"                                value={password}                                onChange={(e) => setPassword(e.target.value)}                                required                            />                            <Input                                label="Confirm Password"                                type="password"                                value={confirmPassword}                                onChange={(e) => setConfirmPassword(e.target.value)}                                required                            />                            {error && <div className="text-red-500 text-sm">{error}</div>}                            <Button type="submit" className="w-full">                                Create Account                            </Button>                        </form>                    </Card>                </div>            </div>        </Layout>    );};export default Register;
