@@ -8,6 +8,8 @@ import Distribution from './pages/Distribution';
 import CoverLetter from './pages/CoverLetter';
 import { ResumeProvider } from './context/ResumeContext';
 
+import Home from './pages/Home';
+
 // Wrap fitur baru dengan ResumeProvider agar bisa akses data resume
 const WithResume = ({ children }) => (
     <ResumeProvider>{children}</ResumeProvider>
@@ -16,7 +18,7 @@ const WithResume = ({ children }) => (
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Navigate to="/builder" replace />} />
+            <Route path="/" element={<Home />} />
             <Route path="/builder" element={<Builder />} />
             <Route path="/tailoring" element={<WithResume><Tailoring /></WithResume>} />
             <Route path="/distribution" element={<WithResume><Distribution /></WithResume>} />
