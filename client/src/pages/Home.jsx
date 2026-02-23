@@ -42,13 +42,12 @@ const Home = () => {
                         </span>
                     </div>
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                        <a href="#features" className="hover:text-white transition-colors">Features</a>
-                        <Link to="/builder" className="hover:text-white transition-colors">Builder</Link>
+                        <a href="#features" className="hover:text-white transition-colors">Fitur</a>
+                        <Link to="/builder" className="hover:text-white transition-colors">Buat CV</Link>
                     </div>
                     <div className="flex items-center gap-4 text-sm font-medium">
-                        <Link to="/login" className="text-gray-300 hover:text-white transition-colors">Sign In</Link>
                         <Link to="/builder" className="bg-white text-black px-5 py-2.5 rounded-full hover:bg-gray-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                            Get Started
+                            Mulai Sekarang
                         </Link>
                     </div>
                 </div>
@@ -60,25 +59,25 @@ const Home = () => {
                     <div className="inline-flex items-center justify-center mb-8">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium">
                             <Sparkles size={16} />
-                            <span>AI-Powered Resume Builder</span>
+                            <span>Bikin CV ATS-Friendly Mudah & Cepat</span>
                         </div>
                     </div>
                     <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
-                        Land your dream job with a <br className="hidden lg:block" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
-                            perfectly crafted resume.
+                        Dapatkan pekerjaan impianmu <br className="hidden lg:block" />
+                        dengan <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
+                            CV yang profesional.
                         </span>
                     </h1>
                     <p className="text-lg lg:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Build ATS-friendly resumes, tailor them to specific job descriptions with AI, generate cover letters, and distribute them—all in one seamless platform.
+                        Nggak perlu ribet mikirin desain. Tinggal masukin data kamu, pilih template yang keren, rapihin isi CV, dan langsung download versi PDF-nya gratis!
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link to="/builder" className="group w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-[0_0_30px_rgba(79,70,229,0.4)] transition-all duration-300">
-                            Create Your Resume
+                            Bikin CV Sekarang
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <a href="#features" className="w-full sm:w-auto flex items-center justify-center px-8 py-4 rounded-full font-semibold text-gray-300 border border-gray-700 hover:bg-white/5 transition-all">
-                            Explore Features
+                            Lihat Fitur
                         </a>
                     </div>
                 </div>
@@ -122,32 +121,32 @@ const Home = () => {
             <section id="features" className="relative z-10 bg-black/40 border-t border-white/5 py-24">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl lg:text-5xl font-bold mb-4">Everything you need to succeed</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">Our powerful suite of tools is designed to get you past the ATS and into the interview room.</p>
+                        <h2 className="text-3xl lg:text-5xl font-bold mb-4">Semua yang kamu butuhkan</h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto">Fitur simpel tapi lengkap buat bantu kamu lolos screening HRD dan dapet panggilan interview.</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <FeatureCard
                             icon={FileText}
-                            title="Pro Builder"
-                            description="Create beautiful, ATS-friendly resumes with our intuitive real-time drag-and-drop editor."
+                            title="Desain Keren"
+                            description="Tinggal pilih template resume yang profesional, modern, dan tentunya ATS-friendly."
                             color="blue"
                         />
                         <FeatureCard
                             icon={Sparkles}
-                            title="AI Tailoring"
-                            description="Instantly adapt your resume to match specific job descriptions using advanced AI."
+                            title="Penyesuaian Mudah"
+                            description="Ganti font, warna, bentuk foto, sampai urutan posisi section sesuka hati kamu."
                             color="purple"
                         />
                         <FeatureCard
                             icon={PenTool}
-                            title="Cover Letters"
-                            description="Generate highly personalized cover letters that complement your resume perfectly."
+                            title="Cover Letter"
+                            description="Punya template surat lamaran yang bisa kamu cocokan biar lebih stand-out."
                             color="pink"
                         />
                         <FeatureCard
                             icon={Send}
-                            title="Distribution Hub"
-                            description="Track and manage your job applications, sending your materials directly to recruiters."
+                            title="Langsung Download"
+                            description="Gak perlu nunggu lama, isi data komplit langsung bisa kamu simpan bentuk PDF."
                             color="emerald"
                         />
                     </div>
@@ -160,19 +159,19 @@ const Home = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         <div>
                             <div className="text-4xl font-bold text-white mb-2">6+</div>
-                            <div className="text-gray-400 text-sm">Premium Templates</div>
+                            <div className="text-gray-400 text-sm">Pilihan Template</div>
                         </div>
                         <div>
                             <div className="text-4xl font-bold text-white mb-2">100%</div>
-                            <div className="text-gray-400 text-sm">ATS Compliant</div>
+                            <div className="text-gray-400 text-sm">Standar ATS</div>
                         </div>
                         <div>
                             <div className="text-4xl font-bold text-white mb-2">1-Click</div>
-                            <div className="text-gray-400 text-sm">PDF Export</div>
+                            <div className="text-gray-400 text-sm">Format PDF</div>
                         </div>
                         <div>
-                            <div className="text-4xl font-bold text-white mb-2">Free</div>
-                            <div className="text-gray-400 text-sm">To get started</div>
+                            <div className="text-4xl font-bold text-white mb-2">Gratis</div>
+                            <div className="text-gray-400 text-sm">Langsung Pakai</div>
                         </div>
                     </div>
                 </div>
@@ -181,10 +180,10 @@ const Home = () => {
             {/* CTA Section */}
             <section className="relative z-10 py-24">
                 <div className="max-w-4xl mx-auto px-6 text-center">
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-6">Ready to boost your career?</h2>
-                    <p className="text-xl text-gray-400 mb-10">Join thousands of job seekers who have successfully landed their dream roles.</p>
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-6">Udah siap buat dilirik HRD?</h2>
+                    <p className="text-xl text-gray-400 mb-10">Bikin langkah pertamamu nyari kerja makin gampang mulai dari sini.</p>
                     <Link to="/builder" className="inline-flex items-center justify-center gap-2 bg-white text-black px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-200 hover:scale-105 transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)]">
-                        Build Your Resume Now
+                        Gas Bikin CV Sekarang
                         <ArrowRight size={20} />
                     </Link>
                 </div>
