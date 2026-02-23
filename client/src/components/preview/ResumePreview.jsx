@@ -168,7 +168,7 @@ const ResumePreview = () => {
                         />
                     </div>
 
-                    {/* Text Color - only for non-professional templates */}
+                    {/* Text Color & Alignment - only for non-professional templates */}
                     {!isProfessional && (
                         <>
                             <div className="w-px h-5 bg-gray-200" />
@@ -181,6 +181,30 @@ const ResumePreview = () => {
                                     className="w-6 h-6 rounded border border-gray-200 cursor-pointer p-0.5"
                                     title="Pilih warna teks"
                                 />
+                            </div>
+                            <div className="w-px h-5 bg-gray-200" />
+                            <div className="flex items-center gap-1">
+                                <span className="text-xs font-semibold text-gray-500">Rata:</span>
+                                <div className="flex gap-0.5">
+                                    {[
+                                        { value: 'left', icon: '⫶', title: 'Rata Kiri' },
+                                        { value: 'center', icon: '☰', title: 'Rata Tengah' },
+                                        { value: 'right', icon: '⫷', title: 'Rata Kanan' },
+                                        { value: 'justify', icon: '▤', title: 'Rata Kanan-Kiri (Justify)' },
+                                    ].map(({ value, icon, title }) => (
+                                        <button
+                                            key={value}
+                                            title={title}
+                                            onClick={() => updateResumeData({ textAlign: value })}
+                                            className={`w-6 h-6 rounded text-xs flex items-center justify-center border transition-all ${(resumeData.textAlign || 'left') === value
+                                                ? 'bg-blue-600 text-white border-blue-600'
+                                                : 'bg-white text-gray-600 border-gray-200 hover:border-blue-300'
+                                                }`}
+                                        >
+                                            {icon}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </>
                     )}
@@ -226,6 +250,20 @@ const ResumePreview = () => {
                                         >
                                             <option value="circle">Bulat</option>
                                             <option value="square">Kotak</option>
+                                        </select>
+                                    </div>
+
+                                    {/* Photo Size */}
+                                    <div className="flex items-center gap-1">
+                                        <span className="text-xs font-semibold text-gray-500">Ukuran:</span>
+                                        <select
+                                            value={resumeData.photoSize || 'medium'}
+                                            onChange={(e) => updateResumeData({ photoSize: e.target.value })}
+                                            className="text-xs border border-gray-200 rounded-md py-1 pl-1.5 pr-5 bg-white cursor-pointer"
+                                        >
+                                            <option value="small">Kecil</option>
+                                            <option value="medium">Sedang</option>
+                                            <option value="large">Besar</option>
                                         </select>
                                     </div>
 

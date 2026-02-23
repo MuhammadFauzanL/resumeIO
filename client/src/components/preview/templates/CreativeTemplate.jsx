@@ -63,6 +63,8 @@ const CreativeTemplate = ({ data }) => {
     const color = themeColor || '#6C63FF';
     const txtColor = textColor || '#000000';
     const fontStyle = { fontFamily: font || '"Poppins", "Segoe UI", Arial, sans-serif' };
+    const textAlignStyle = { textAlign: safeData.textAlign || 'left' };
+    const photoSizePx = safeData.photoSize === 'small' ? '56px' : safeData.photoSize === 'large' ? '112px' : '80px';
     const lang = language || 'en';
     const t = {
         profile: lang === 'id' ? 'Profil' : 'About Me',
@@ -124,12 +126,12 @@ const CreativeTemplate = ({ data }) => {
                         <img
                             src={personalInfo.photoUrl}
                             alt={`${personalInfo.firstName || ''} ${personalInfo.lastName || ''}`}
-                            className="w-24 h-24 object-cover mb-3 shadow-lg"
-                            style={{ borderRadius: photoRadius, border: photoOutline ? '3px solid rgba(255,255,255,0.6)' : 'none' }}
+                            className="object-cover mb-3 shadow-lg"
+                            style={{ width: photoSizePx, height: photoSizePx, borderRadius: photoRadius, border: photoOutline ? '3px solid rgba(255,255,255,0.6)' : 'none' }}
                         />
                     ) : shouldShowPhoto ? (
-                        <div className="w-20 h-20 bg-white bg-opacity-20 flex items-center justify-center text-white text-3xl font-bold mb-3"
-                            style={{ borderRadius: photoRadius, border: photoOutline ? '2px solid rgba(255,255,255,0.3)' : 'none' }}>
+                        <div className="bg-white bg-opacity-20 flex items-center justify-center text-white text-3xl font-bold mb-3"
+                            style={{ width: photoSizePx, height: photoSizePx, borderRadius: photoRadius, border: photoOutline ? '2px solid rgba(255,255,255,0.3)' : 'none' }}>
                             {(personalInfo?.firstName || 'R')[0]}{(personalInfo?.lastName || '')[0]}
                         </div>
                     ) : null}
@@ -239,7 +241,7 @@ const CreativeTemplate = ({ data }) => {
                     <MainSection title={t.experience}>
                         <div className="space-y-4">
                             {safeExperience.map((exp, i) => (
-                                <div key={exp?.id || i} className="relative pl-4" style={{ borderLeft: `2px solid ${color}20` }}>
+                                <div key={exp?.id || i} className="relative pl-4" style={{ borderLeft: `2px solid ${color}20`, pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                     <div className="absolute -left-1.5 top-1 w-3 h-3 rounded-full border-2" style={{ backgroundColor: 'white', borderColor: color }} />
                                     <div className="flex justify-between items-baseline mb-0.5">
                                         <h3 className="text-sm font-semibold" style={{ color: txtColor }}>{exp?.jobTitle}</h3>
@@ -247,7 +249,7 @@ const CreativeTemplate = ({ data }) => {
                                     </div>
                                     <div className="text-xs font-medium mb-0.5" style={{ color }}>{exp?.employer}</div>
                                     <div className="text-xs text-gray-400 mb-1">{fmtDate(exp?.startDate)} — {exp?.endDate ? fmtDate(exp.endDate) : t.present}</div>
-                                    <div className="text-xs" style={{ color: txtColor }}><MD content={exp?.description} /></div>
+                                    <div className="text-xs" style={{ ...textAlignStyle, color: txtColor }}><MD content={exp?.description} /></div>
                                 </div>
                             ))}
                         </div>
@@ -258,7 +260,7 @@ const CreativeTemplate = ({ data }) => {
                     <MainSection title={t.education}>
                         <div className="space-y-3">
                             {safeEducation.map((edu, i) => (
-                                <div key={edu?.id || i} className="relative pl-4" style={{ borderLeft: `2px solid ${color}20` }}>
+                                <div key={edu?.id || i} className="relative pl-4" style={{ borderLeft: `2px solid ${color}20`, pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                     <div className="absolute -left-1.5 top-1 w-3 h-3 rounded-full border-2" style={{ backgroundColor: 'white', borderColor: color }} />
                                     <div className="flex justify-between items-baseline mb-0.5">
                                         <h3 className="text-sm font-semibold" style={{ color: txtColor }}>{edu?.degree}</h3>
@@ -266,7 +268,7 @@ const CreativeTemplate = ({ data }) => {
                                     </div>
                                     <div className="text-xs font-medium mb-0.5" style={{ color }}>{edu?.school}</div>
                                     <div className="text-xs text-gray-400 mb-1">{fmtDate(edu?.startDate)} — {edu?.endDate ? fmtDate(edu.endDate) : t.present}</div>
-                                    <div className="text-xs" style={{ color: txtColor }}><MD content={edu?.description} /></div>
+                                    <div className="text-xs" style={{ ...textAlignStyle, color: txtColor }}><MD content={edu?.description} /></div>
                                 </div>
                             ))}
                         </div>
@@ -277,12 +279,12 @@ const CreativeTemplate = ({ data }) => {
                     <MainSection title={t.organizations}>
                         <div className="space-y-3">
                             {safeOrganizations.map((org, i) => (
-                                <div key={org?.id || i} className="relative pl-4" style={{ borderLeft: `2px solid ${color}20` }}>
+                                <div key={org?.id || i} className="relative pl-4" style={{ borderLeft: `2px solid ${color}20`, pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                     <div className="absolute -left-1.5 top-1 w-3 h-3 rounded-full border-2" style={{ backgroundColor: 'white', borderColor: color }} />
                                     <h3 className="text-sm font-semibold" style={{ color: txtColor }}>{org?.role}</h3>
                                     <div className="text-xs font-medium mb-0.5" style={{ color }}>{org?.organization}</div>
                                     <div className="text-xs text-gray-400 mb-1">{fmtDate(org?.startDate)} — {org?.endDate ? fmtDate(org.endDate) : t.present}</div>
-                                    <div className="text-xs" style={{ color: txtColor }}><MD content={org?.description} /></div>
+                                    <div className="text-xs" style={{ ...textAlignStyle, color: txtColor }}><MD content={org?.description} /></div>
                                 </div>
                             ))}
                         </div>

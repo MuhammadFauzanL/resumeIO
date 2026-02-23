@@ -40,9 +40,10 @@ const MinimalTemplate = ({ data }) => {
     const txtColor = textColor || '#000000';
     const shouldShowPhoto = showPhoto !== false;
     const photoRadius = photoShape === 'square' ? '4px' : '50%';
-
     const color = themeColor || '#1a1a2e';
     const fontStyle = { fontFamily: font || '"Inter", "Helvetica Neue", Arial, sans-serif' };
+    const textAlignStyle = { textAlign: (data || {}).textAlign || 'left' };
+    const photoSizePx = (data || {}).photoSize === 'small' ? '40px' : (data || {}).photoSize === 'large' ? '96px' : '64px';
     const lang = language || 'en';
 
     const t = {
@@ -80,8 +81,8 @@ const MinimalTemplate = ({ data }) => {
                         <img
                             src={personalInfo.photoUrl}
                             alt={`${personalInfo.firstName || ''} ${personalInfo.lastName || ''}`}
-                            className="w-16 h-16 object-cover flex-shrink-0"
-                            style={{ borderRadius: photoRadius, border: photoOutline ? `2px solid ${color}` : 'none' }}
+                            className="object-cover flex-shrink-0"
+                            style={{ width: photoSizePx, height: photoSizePx, borderRadius: photoRadius, border: photoOutline ? `2px solid ${color}` : 'none' }}
                         />
                     )}
                     <div>
@@ -121,7 +122,7 @@ const MinimalTemplate = ({ data }) => {
                     <SectionTitle title={t.experience} />
                     <div className="space-y-4">
                         {experience.map((exp, i) => (
-                            <div key={i} className="grid grid-cols-4 gap-4">
+                            <div key={i} className="grid grid-cols-4 gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                 <div className="text-xs text-gray-400 pt-0.5">
                                     {fmtDate(exp.startDate)} — {exp.endDate ? fmtDate(exp.endDate) : t.present}
                                 </div>
@@ -131,7 +132,7 @@ const MinimalTemplate = ({ data }) => {
                                         <span className="text-xs text-gray-400">{exp.city}</span>
                                     </div>
                                     <div className="text-xs text-gray-500 mb-1" style={{ color }}>{exp.employer}</div>
-                                    <div className="text-xs text-gray-600 leading-relaxed"><MD content={exp.description} /></div>
+                                    <div className="text-xs text-gray-600 leading-relaxed" style={textAlignStyle}><MD content={exp.description} /></div>
                                 </div>
                             </div>
                         ))}
@@ -144,7 +145,7 @@ const MinimalTemplate = ({ data }) => {
                     <SectionTitle title={t.education} />
                     <div className="space-y-4">
                         {education.map((edu, i) => (
-                            <div key={i} className="grid grid-cols-4 gap-4">
+                            <div key={i} className="grid grid-cols-4 gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                 <div className="text-xs text-gray-400 pt-0.5">
                                     {fmtDate(edu.startDate)} — {edu.endDate ? fmtDate(edu.endDate) : t.present}
                                 </div>
@@ -154,7 +155,7 @@ const MinimalTemplate = ({ data }) => {
                                         <span className="text-xs text-gray-400">{edu.city}</span>
                                     </div>
                                     <div className="text-xs mb-1" style={{ color }}>{edu.school}</div>
-                                    <div className="text-xs text-gray-600 leading-relaxed"><MD content={edu.description} /></div>
+                                    <div className="text-xs text-gray-600 leading-relaxed" style={textAlignStyle}><MD content={edu.description} /></div>
                                 </div>
                             </div>
                         ))}
@@ -203,14 +204,14 @@ const MinimalTemplate = ({ data }) => {
                     <SectionTitle title={t.organizations} />
                     <div className="space-y-3">
                         {organizations.map((org, i) => (
-                            <div key={i} className="grid grid-cols-4 gap-4">
+                            <div key={i} className="grid grid-cols-4 gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                 <div className="text-xs text-gray-400 pt-0.5">
                                     {fmtDate(org.startDate)} — {org.endDate ? fmtDate(org.endDate) : t.present}
                                 </div>
                                 <div className="col-span-3">
                                     <h3 className="text-sm font-semibold">{org.role}</h3>
                                     <div className="text-xs mb-1" style={{ color }}>{org.organization}</div>
-                                    <div className="text-xs text-gray-600"><MD content={org.description} /></div>
+                                    <div className="text-xs text-gray-600" style={textAlignStyle}><MD content={org.description} /></div>
                                 </div>
                             </div>
                         ))}

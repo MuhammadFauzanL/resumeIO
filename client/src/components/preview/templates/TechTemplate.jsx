@@ -39,6 +39,7 @@ const TechTemplate = ({ data }) => {
     const color = themeColor || '#00C896';
     const bgDark = '#0D1121';
     const fontStyle = { fontFamily: font || '"JetBrains Mono", "Fira Code", "Courier New", monospace' };
+    const textAlignStyle = { textAlign: (data || {}).textAlign || 'left' };
     const lang = language || 'en';
     const t = {
         profile: lang === 'id' ? 'TENTANG_SAYA' : 'ABOUT_ME',
@@ -184,7 +185,7 @@ const TechTemplate = ({ data }) => {
                         <SectionTitle title={t.experience} />
                         <div className="space-y-4">
                             {experience.map((exp, i) => (
-                                <div key={i} className="relative pl-3" style={{ borderLeft: `2px solid ${color}` }}>
+                                <div key={i} className="relative pl-3" style={{ borderLeft: `2px solid ${color}`, pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                     <div className="flex justify-between items-baseline">
                                         <h3 className="text-sm font-bold text-gray-900">{exp.jobTitle}</h3>
                                         <span className="text-xs" style={{ color }}>{exp.city}</span>
@@ -195,7 +196,7 @@ const TechTemplate = ({ data }) => {
                                             {fmtDate(exp.startDate)} → {exp.endDate ? fmtDate(exp.endDate) : t.present}
                                         </div>
                                     </div>
-                                    <div className="text-xs text-gray-600 leading-relaxed"><MD content={exp.description} /></div>
+                                    <div className="text-xs text-gray-600 leading-relaxed" style={textAlignStyle}><MD content={exp.description} /></div>
                                 </div>
                             ))}
                         </div>
@@ -207,7 +208,7 @@ const TechTemplate = ({ data }) => {
                         <SectionTitle title={t.education} />
                         <div className="space-y-3">
                             {education.map((edu, i) => (
-                                <div key={i} className="relative pl-3" style={{ borderLeft: `2px solid ${color}` }}>
+                                <div key={i} className="relative pl-3" style={{ borderLeft: `2px solid ${color}`, pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                     <div className="flex justify-between items-baseline">
                                         <h3 className="text-sm font-bold text-gray-900">{edu.degree}</h3>
                                         <span className="text-xs text-gray-400 font-mono">
@@ -215,7 +216,7 @@ const TechTemplate = ({ data }) => {
                                         </span>
                                     </div>
                                     <div className="text-xs font-semibold mb-1" style={{ color }}>{edu.school} {edu.city && `· ${edu.city}`}</div>
-                                    <div className="text-xs text-gray-600"><MD content={edu.description} /></div>
+                                    <div className="text-xs text-gray-600" style={textAlignStyle}><MD content={edu.description} /></div>
                                 </div>
                             ))}
                         </div>
@@ -227,7 +228,7 @@ const TechTemplate = ({ data }) => {
                         <SectionTitle title={t.organizations} />
                         <div className="space-y-3">
                             {organizations.map((org, i) => (
-                                <div key={i} className="relative pl-3" style={{ borderLeft: `2px solid ${color}` }}>
+                                <div key={i} className="relative pl-3" style={{ borderLeft: `2px solid ${color}`, pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                     <div className="flex justify-between items-baseline">
                                         <h3 className="text-sm font-bold text-gray-900">{org.role}</h3>
                                         <span className="text-xs text-gray-400 font-mono">
@@ -235,7 +236,7 @@ const TechTemplate = ({ data }) => {
                                         </span>
                                     </div>
                                     <div className="text-xs font-semibold mb-1" style={{ color }}>{org.organization}</div>
-                                    <div className="text-xs text-gray-600"><MD content={org.description} /></div>
+                                    <div className="text-xs text-gray-600" style={textAlignStyle}><MD content={org.description} /></div>
                                 </div>
                             ))}
                         </div>

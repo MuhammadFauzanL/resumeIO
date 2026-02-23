@@ -60,9 +60,11 @@ const ModernTemplate = ({ data }) => {
     const color = themeColor || '#007BFF';
     const txtColor = textColor || '#000000';
     const fontStyle = { fontFamily: font || '"Segoe UI", Arial, sans-serif' };
+    const textAlignStyle = { textAlign: safeData.textAlign || 'left' };
     const shouldShowPhoto = showPhoto !== false;
     const photoRadius = photoShape === 'square' ? '4px' : '50%';
     const photoBorder = photoOutline ? `2px solid ${color}` : 'none';
+    const photoSizePx = safeData.photoSize === 'small' ? '40px' : safeData.photoSize === 'large' ? '96px' : '64px';
     const lang = language || 'en';
     const t = {
         profile: lang === 'id' ? 'Profil' : 'Profile',
@@ -94,8 +96,8 @@ const ModernTemplate = ({ data }) => {
                         <img
                             src={personalInfo.photoUrl}
                             alt={`${personalInfo.firstName || ''} ${personalInfo.lastName || ''}`}
-                            className="w-16 h-16 object-cover flex-shrink-0"
-                            style={{ borderRadius: photoRadius, border: photoBorder }}
+                            className="object-cover flex-shrink-0"
+                            style={{ width: photoSizePx, height: photoSizePx, borderRadius: photoRadius, border: photoBorder }}
                         />
                     )}
                     <div>
@@ -131,7 +133,7 @@ const ModernTemplate = ({ data }) => {
                                 style={{ color, borderColor: color }}>{t.experience}</h2>
                             <div className="space-y-6">
                                 {safeExperience.map((exp, index) => (
-                                    <div key={exp?.id || index} className="flex flex-col sm:flex-row gap-4">
+                                    <div key={exp?.id || index} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                         <div className="sm:w-1/4 flex-shrink-0">
                                             <div className="text-sm font-semibold text-gray-600">
                                                 {fmtDate(exp?.startDate)} - {exp?.endDate ? fmtDate(exp.endDate) : t.present}
@@ -143,7 +145,7 @@ const ModernTemplate = ({ data }) => {
                                                 <span className="text-sm text-gray-500">{exp?.city}</span>
                                             </div>
                                             <div className="text-sm font-medium text-gray-700 mb-2">{exp?.employer}</div>
-                                            <div className="text-sm text-gray-700 leading-relaxed pl-0">
+                                            <div className="text-sm text-gray-700 leading-relaxed pl-0" style={textAlignStyle}>
                                                 <MD content={exp?.description} />
                                             </div>
                                         </div>
@@ -159,7 +161,7 @@ const ModernTemplate = ({ data }) => {
                                 style={{ color, borderColor: color }}>{t.education}</h2>
                             <div className="space-y-6">
                                 {safeEducation.map((edu, index) => (
-                                    <div key={edu?.id || index} className="flex flex-col sm:flex-row gap-4">
+                                    <div key={edu?.id || index} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                         <div className="sm:w-1/4 flex-shrink-0">
                                             <div className="text-sm font-semibold text-gray-600">
                                                 {fmtDate(edu?.startDate)} - {edu?.endDate ? fmtDate(edu.endDate) : t.present}
@@ -171,7 +173,7 @@ const ModernTemplate = ({ data }) => {
                                                 <span className="text-sm text-gray-500">{edu?.city}</span>
                                             </div>
                                             <div className="text-sm font-medium text-gray-700 mb-2">{edu?.school}</div>
-                                            <div className="text-sm text-gray-700 leading-relaxed pl-0">
+                                            <div className="text-sm text-gray-700 leading-relaxed pl-0" style={textAlignStyle}>
                                                 <MD content={edu?.description} />
                                             </div>
                                         </div>
@@ -187,7 +189,7 @@ const ModernTemplate = ({ data }) => {
                                 style={{ color, borderColor: color }}>{t.organizations}</h2>
                             <div className="space-y-6">
                                 {safeOrganizations.map((org, index) => (
-                                    <div key={org?.id || index} className="flex flex-col sm:flex-row gap-4">
+                                    <div key={org?.id || index} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                         <div className="sm:w-1/4 flex-shrink-0">
                                             <div className="text-sm font-semibold text-gray-600">
                                                 {fmtDate(org?.startDate)} - {org?.endDate ? fmtDate(org.endDate) : t.present}
@@ -198,7 +200,7 @@ const ModernTemplate = ({ data }) => {
                                                 <h3 className="font-bold text-lg" style={{ color: txtColor }}>{org?.role}</h3>
                                             </div>
                                             <div className="text-sm font-medium text-gray-700 mb-2">{org?.organization}</div>
-                                            <div className="text-sm text-gray-700 leading-relaxed pl-0">
+                                            <div className="text-sm text-gray-700 leading-relaxed pl-0" style={textAlignStyle}>
                                                 <MD content={org?.description} />
                                             </div>
                                         </div>

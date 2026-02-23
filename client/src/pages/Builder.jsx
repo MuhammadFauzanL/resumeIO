@@ -205,18 +205,32 @@ const BuilderContent = () => {
                     body * {
                         visibility: hidden;
                     }
+                    /* Pastikan html dan body memiliki tinggi otomatis dan overflow terlihat agar tidak terpotong (1 halaman) */
+                    html, body, #root {
+                        height: auto !important;
+                        overflow: visible !important;
+                    }
+
+                    /* Override kelas utilitas yang bisa memotong konten saat di-print */
+                    .h-full, .h-screen, .min-h-full, .overflow-y-auto, .overflow-hidden, .overflow-auto, .flex-1 {
+                        height: auto !important;
+                        overflow: visible !important;
+                    }
+
                     /* Show only the resume preview */
                     #resume-preview-panel,
                     #resume-preview-panel * {
                         visibility: visible !important;
                     }
-                    /* Position the preview to fill the page */
+                    
+                    /* Position the preview to fill the page, menggunakan absolute untuk banyak halaman */
                     #resume-preview-panel {
-                        position: fixed !important;
+                        position: absolute !important;
                         top: 0 !important;
                         left: 0 !important;
                         width: 100% !important;
                         height: auto !important;
+                        min-height: 100vh !important;
                         overflow: visible !important;
                         background: white !important;
                         padding: 0 !important;
@@ -230,8 +244,12 @@ const BuilderContent = () => {
                     /* A4 page setup */
                     @page {
                         size: A4;
-                        margin: 0;
+                        margin: 15mm 0; /* Margin 15mm atas bawah di semua halaman, semua template */
                     }
+                    ${resumeData.template === 'professional' ? `
+                    @page :first {
+                        margin-top: 0; /* Halaman pertama Professional: margin atas tetap 0 sesuai format */
+                    }` : ''}
                     /* The resume paper element */
                     .resume-paper {
                         width: 100% !important;
@@ -247,6 +265,21 @@ const BuilderContent = () => {
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;
                         color-adjust: exact !important;
+                    }
+
+                    /* Memaksa elemen yang panjang (termasuk layout flex) terpotong wajar antar halaman,
+                       bukan melompat semua ke halaman mselanjutnya karena tidak muat */
+                    div, section, p, li, article, .flex {
+                        page-break-inside: auto !important;
+                        break-inside: auto !important;
+                    }
+
+                    /* Judul tidak boleh terputus atau tertinggal sendirian di ujung halaman */
+                    h1, h2, h3, h4, h5, h6 {
+                        page-break-inside: avoid !important;
+                        break-inside: avoid !important;
+                        page-break-after: avoid !important;
+                        break-after: avoid !important;
                     }
                 }
             `}</style>

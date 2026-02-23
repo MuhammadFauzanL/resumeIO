@@ -38,6 +38,7 @@ const ExecutiveTemplate = ({ data }) => {
 
     const color = themeColor || '#1B2A4A';
     const fontStyle = { fontFamily: font || '"Georgia", "Times New Roman", serif' };
+    const textAlignStyle = { textAlign: (data || {}).textAlign || 'left' };
     const lang = language || 'en';
     const t = {
         profile: lang === 'id' ? 'PROFIL PROFESIONAL' : 'PROFESSIONAL PROFILE',
@@ -114,7 +115,7 @@ const ExecutiveTemplate = ({ data }) => {
                             <SectionTitle title={t.experience} />
                             <div className="space-y-4">
                                 {experience.map((exp, i) => (
-                                    <div key={i}>
+                                    <div key={i} style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                         <div className="flex justify-between items-baseline">
                                             <h3 className="text-sm font-bold text-gray-900">{exp.jobTitle}</h3>
                                             <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{exp.city}</span>
@@ -125,7 +126,7 @@ const ExecutiveTemplate = ({ data }) => {
                                                 {fmtDate(exp.startDate)} – {exp.endDate ? fmtDate(exp.endDate) : t.present}
                                             </div>
                                         </div>
-                                        <div className="text-xs text-gray-600 leading-relaxed"><MD content={exp.description} /></div>
+                                        <div className="text-xs text-gray-600 leading-relaxed" style={textAlignStyle}><MD content={exp.description} /></div>
                                     </div>
                                 ))}
                             </div>
@@ -137,7 +138,7 @@ const ExecutiveTemplate = ({ data }) => {
                             <SectionTitle title={t.education} />
                             <div className="space-y-3">
                                 {education.map((edu, i) => (
-                                    <div key={i}>
+                                    <div key={i} style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                         <div className="flex justify-between items-baseline">
                                             <h3 className="text-sm font-bold text-gray-900">{edu.degree}</h3>
                                             <span className="text-xs text-gray-500">
@@ -145,7 +146,7 @@ const ExecutiveTemplate = ({ data }) => {
                                             </span>
                                         </div>
                                         <div className="text-xs italic mb-1" style={{ color }}>{edu.school} {edu.city && `· ${edu.city}`}</div>
-                                        <div className="text-xs text-gray-600"><MD content={edu.description} /></div>
+                                        <div className="text-xs text-gray-600" style={textAlignStyle}><MD content={edu.description} /></div>
                                     </div>
                                 ))}
                             </div>
@@ -157,7 +158,7 @@ const ExecutiveTemplate = ({ data }) => {
                             <SectionTitle title={t.organizations} />
                             <div className="space-y-3">
                                 {organizations.map((org, i) => (
-                                    <div key={i}>
+                                    <div key={i} style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                                         <div className="flex justify-between items-baseline">
                                             <h3 className="text-sm font-bold text-gray-900">{org.role}</h3>
                                             <span className="text-xs text-gray-500">
@@ -165,7 +166,7 @@ const ExecutiveTemplate = ({ data }) => {
                                             </span>
                                         </div>
                                         <div className="text-xs italic mb-1" style={{ color }}>{org.organization}</div>
-                                        <div className="text-xs text-gray-600"><MD content={org.description} /></div>
+                                        <div className="text-xs text-gray-600" style={textAlignStyle}><MD content={org.description} /></div>
                                     </div>
                                 ))}
                             </div>
