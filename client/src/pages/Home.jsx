@@ -153,6 +153,33 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* How It Works / Getting Started */}
+            <section className="relative z-10 py-24 bg-[#0a0f1d]">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl lg:text-5xl font-bold mb-4">Cara Memulai</h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto">3 langkah simpel buat bikin CV kamu.</p>
+                    </div>
+                    <div className="flex flex-col md:flex-row gap-8 justify-center items-center text-center">
+                        <div className="flex-1 bg-white/5 border border-white/10 p-8 rounded-2xl">
+                            <div className="text-3xl font-bold text-blue-400 mb-4">1</div>
+                            <h3 className="text-xl font-bold text-white mb-2">Isi Data</h3>
+                            <p className="text-gray-400">Masukkan info diri, pendidikan, dan pengalaman kerjamu.</p>
+                        </div>
+                        <div className="flex-1 bg-white/5 border border-white/10 p-8 rounded-2xl">
+                            <div className="text-3xl font-bold text-purple-400 mb-4">2</div>
+                            <h3 className="text-xl font-bold text-white mb-2">Pilih Desain</h3>
+                            <p className="text-gray-400">Pilih dari berbagai template CV profesional yang tersedia.</p>
+                        </div>
+                        <div className="flex-1 bg-white/5 border border-white/10 p-8 rounded-2xl">
+                            <div className="text-3xl font-bold text-emerald-400 mb-4">3</div>
+                            <h3 className="text-xl font-bold text-white mb-2">Download PDF</h3>
+                            <p className="text-gray-400">Selesai! Langsung simpan CV kamu dalam format PDF gratis.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Social Proof / Stats */}
             <section className="relative z-10 py-20 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-6">
