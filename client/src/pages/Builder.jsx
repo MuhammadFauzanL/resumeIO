@@ -75,8 +75,8 @@ const BuilderContent = () => {
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
                         <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold"
-                            style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>P</div>
-                        <span className="font-bold text-gray-800 hidden sm:block">Pro<span className="text-blue-500">Resume</span></span>
+                            style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>D</div>
+                        <span className="font-bold text-gray-800 hidden sm:block">DFCREATIVE<span className="text-blue-500">STUDIO</span></span>
                     </div>
 
                     {/* Nav Pills */}
