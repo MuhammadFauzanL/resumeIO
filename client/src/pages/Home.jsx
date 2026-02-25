@@ -35,10 +35,10 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-                            <span className="text-white font-bold text-xl drop-shadow-md">P</span>
+                            <span className="text-white font-bold text-xl drop-shadow-md">D</span>
                         </div>
                         <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                            ProResume
+                            DFCREATIVE STUDIO
                         </span>
                     </div>
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
@@ -194,12 +194,12 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                            <span className="text-white font-bold text-sm drop-shadow-md">P</span>
+                            <span className="text-white font-bold text-sm drop-shadow-md">D</span>
                         </div>
-                        <span className="text-xl font-bold text-white">ProResume</span>
+                        <span className="text-xl font-bold text-white">DFCREATIVE STUDIO</span>
                     </div>
                     <div className="text-gray-500 text-sm">
-                        © {new Date().getFullYear()} ProResume. All rights reserved.
+                        © {new Date().getFullYear()} DFCREATIVE STUDIO. All rights reserved.
                     </div>
                     <div className="flex gap-6 text-sm text-gray-400">
                         <a href="#" className="hover:text-white transition-colors">Privacy</a>
